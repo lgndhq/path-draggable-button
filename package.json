@@ -1,0 +1,31 @@
+{
+  "name": "path-draggable-button",
+  "version": "1.0.0",
+  "description": "Drag buttons along an SVG path with jQuery",
+  "main": "path-draggable-button/path-draggable-button.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lgndhq/path-draggable-button.git"
+  },
+  "keywords": [
+    "svg",
+    "path",
+    "button",
+    "jquery",
+    "js"
+  ],
+  "author": "Ryan McCahan <ryan@lgnd.com>",
+  "contributors": [
+    {
+      "name": "Jeff Bridgforth",
+      "email": "jeff@lgnd.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lgndhq/path-draggable-button/issues"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.8.0"
+  }
+}

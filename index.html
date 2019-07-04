@@ -1,0 +1,144 @@
+<html>
+<head>
+  <title>Path Draggable Button by LGND</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="path-draggable-button/path-draggable-button.js"></script>
+
+  <style>
+    body {
+      background-color: #070D59;
+      padding: 90px;
+      display: flex;
+      justify-content: center;
+    }
+    body .toggle-switch-container {
+      margin: 0 100px;
+    }
+    @media (max-width: 1000px) {
+      body .toggle-switch-container {
+        margin: 0 10px;
+      }
+    }
+    @media (max-width: 1000px) {
+      body {
+        flex-direction: column;
+      }
+      body .toggle-switch-container + .toggle-switch-container {
+        margin-top: 80px;
+      }
+    }
+
+    .toggle-switch-container {
+      position: relative;
+      display: inline-block;
+    }
+    .toggle-switch-container.drag-path {
+      width: 180px;
+    }
+    .toggle-switch-container.drag-vertical {
+      width: 2px;
+    }
+
+    .toggle-button {
+      cursor: move;
+      background: url("drag-button.svg") no-repeat;
+      display: block;
+      height: 62px;
+      position: absolute;
+      top: -31px;
+      transition: left .4s ease-out;
+      left: -31px;
+      width: 62px;
+      z-index: 1;
+      transform-origin: center center;
+    }
+
+    #reset-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #fff;
+      padding: 10px;
+      border: 1px solid #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toggle-switch-container drag-path">
+  	<svg width="189" height="63" xmlns="http://www.w3.org/2000/svg">
+    <path d="M187.965.885C119.322 38.945 57 59.315 1 62" stroke="#55C1FF" stroke-width="2" fill="none" fill-rule="evenodd" stroke-dasharray="7 7"/>
+  </svg>
+  	<div class="toggle-switch">
+  		<span class="toggle-button"></span>
+  	</div>
+  </div>
+
+  <div class="toggle-switch-container drag-vertical">
+  	<svg width="2" height="60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1,0 l 0,60" stroke="#55C1FF" stroke-width="2" fill="none" fill-rule="evenodd" stroke-dasharray="7 7"/>
+  </svg>
+  	<div class="toggle-switch">
+  		<span class="toggle-button"></span>
+  	</div>
+  </div>
+
+  <div class="toggle-switch-container drag-horizontal">
+  	<svg width="210" height="2" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,1 l 210,0" stroke="#55C1FF" stroke-width="2" fill="none" fill-rule="evenodd" stroke-dasharray="7 7"/>
+  </svg>
+  	<div class="toggle-switch">
+  		<span class="toggle-button"></span>
+  	</div>
+  </div>
+
+  <div class="toggle-switch-container drag-horizontal">
+  	<svg width="210" height="2" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,1 l 210,0" stroke="#ffffff" stroke-width="2" fill="none" fill-rule="evenodd" />
+  </svg>
+  	<div class="toggle-switch">
+  		<span class="toggle-button"></span>
+  	</div>
+  </div>
+
+  <a href="#" id="reset-button">Reset</a>
+
+  <script type="text/javascript">
+    // Initialize buttons
+    jQuery(function($){
+      $(".toggle-switch-container.drag-path").pathDraggableButton({
+      	pathSelector: 'path',
+      	negative: true
+      }).on('finish', function(e){
+        $(this).animate({ opacity: 0 });
+      });
+
+      $(".toggle-switch-container.drag-horizontal").pathDraggableButton({
+      	pathSelector: 'path',
+      	negative: false
+      }).on('finish', function(e){
+        $(this).animate({ opacity: 0 });
+      }).on('change', function(event, button, value){
+      	console.log(value);
+      });
+
+      $(".toggle-switch-container.drag-vertical").pathDraggableButton({
+      	pathSelector: 'path',
+      	negative: false,
+      	direction: 'vertical'
+      }).on('finish', function(e){
+        $(this).animate({ opacity: 0 });
+      });
+
+      // Reset
+      $("#reset-button").on('click', function(e){
+      	e.preventDefault();
+      	$(".toggle-switch-container").pathDraggableButton("setValue", 0);
+
+      	$(".toggle-switch-container").css('opacity', 1);
+      });
+    });
+  </script>
+</body>
+</html>
