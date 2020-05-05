@@ -84,6 +84,15 @@
   	</div>
   </div>
 
+  <div class="toggle-switch-container drag-vertical-negative">
+  	<svg width="2" height="60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1,60 l 0,-60" stroke="#55C1FF" stroke-width="2" fill="none" fill-rule="evenodd" stroke-dasharray="7 7"/>
+    </svg>
+  	<div class="toggle-switch">
+  		<span class="toggle-button"></span>
+  	</div>
+  </div>
+
   <div class="toggle-switch-container drag-horizontal">
   	<svg width="210" height="2" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,1 l 210,0" stroke="#55C1FF" stroke-width="2" fill="none" fill-rule="evenodd" stroke-dasharray="7 7"/>
@@ -126,6 +135,14 @@
       $(".toggle-switch-container.drag-vertical").pathDraggableButton({
       	pathSelector: 'path',
       	negative: false,
+      	direction: 'vertical'
+      }).on('finish', function(e){
+        $(this).animate({ opacity: 0 });
+      });
+
+      $(".toggle-switch-container.drag-vertical-negative").pathDraggableButton({
+      	pathSelector: 'path',
+      	negative: true,
       	direction: 'vertical'
       }).on('finish', function(e){
         $(this).animate({ opacity: 0 });

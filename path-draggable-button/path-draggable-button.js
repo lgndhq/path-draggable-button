@@ -1,12 +1,12 @@
 ;(function(factory) {
-    'use strict';
-    if (typeof define === 'function' && define.amd) {
-        define(['jquery'], factory);
-    } else if (typeof exports !== 'undefined') {
-        module.exports = factory(require('jquery'));
-    } else {
-        factory(jQuery);
-    }
+		'use strict';
+		if (typeof define === 'function' && define.amd) {
+				define(['jquery'], factory);
+		} else if (typeof exports !== 'undefined') {
+				module.exports = factory(require('jquery'));
+		} else {
+				factory(jQuery);
+		}
 
 }(function($){
 	$.fn.pathDraggableButton = function() {
@@ -50,7 +50,11 @@
 					var slope = (nextPt.y - pt.y) / (nextPt.x - pt.x);
 
 					if (direction == 'vertical') {
-						var angle = -90;
+						if (negative) {
+							var angle = 90;
+						} else {
+							var angle = -90;
+						}
 					} else {
 						if (negative) {
 							var angle = Math.atan2(slope, 1) * 180 / Math.PI;
@@ -95,7 +99,11 @@
 							// Vertical dragging
 							var switchTop = container.offset().top;
 							var switchHeight = path.get(0).getBBox().height;
-							var percentage = ($(window).scrollTop() + clientY - switchTop) / switchHeight;
+							if (negative) {
+								var percentage = ($(window).scrollTop() + switchTop + switchHeight - clientY) / switchHeight;
+							} else {
+								var percentage = ($(window).scrollTop() + clientY - switchTop) / switchHeight;
+							}
 						}
 
 						if (percentage < 0)
